@@ -1,90 +1,57 @@
-# 📚 Library Management System (SQL Project)
+# Library Management System | MySQL
 
-## 🧾 Overview
-This SQL project implements a **Library Management System** to store and manage information about books, employees, branches, and customers. It tracks which books are available, issued, and returned.
+A relational database practice project for managing library branches, employees, books, customers, issued books and returns.
 
----
+## Database design
 
-## 🏗️ Database Schema
-**Database Name:** `library`
+The script creates six tables:
 
-### Tables:
-1. **Branch**
-   - `Branch_no` (PK)
-   - `Manager_Id`
-   - `Branch_address`
-   - `Contact_no`
+| Table | Purpose |
+|---|---|
+| `Branch` | Branch location and manager |
+| `Employee` | Employees assigned to branches |
+| `Books` | Book catalogue and rental price |
+| `Customer` | Registered library customers |
+| `IssueStatus` | Book issue transactions |
+| `ReturnStatus` | Book return transactions |
 
-2. **Employee**
-   - `Emp_Id` (PK)
-   - `Emp_name`
-   - `Position`
-   - `Salary`
-   - `Branch_no` (FK → Branch.Branch_no)
+Primary and foreign keys model the relationships. Branch manager references are assigned after employee rows are inserted, then constrained to valid employee IDs.
 
-3. **Books**
-   - `ISBN` (PK)
-   - `Book_title`
-   - `Category`
-   - `Rental_Price`
-   - `Status`
-   - `Author`
-   - `Publisher`
+## Business queries
 
-4. **Customer**
-   - `Customer_Id` (PK)
-   - `Customer_name`
-   - `Customer_address`
-   - `Reg_date`
+The SQL script demonstrates:
+1. Available books.
+2. Employees ordered by salary.
+3. Books issued by customers.
+4. Book counts by category.
+5. Employees above a salary threshold.
+6. Customers registered before a date who have not issued books.
+7. Employees per branch.
+8. Customers who issued books in a selected month.
+9. Book-title pattern matching.
+10. Branches above an employee-count threshold.
+11. Branch managers and branch addresses.
+12. Customers who issued books above a rental-price threshold.
 
-5. **IssueStatus**
-   - `Issue_Id` (PK)
-   - `Issued_cust` (FK → Customer.Customer_Id)
-   - `Issued_book_name`
-   - `Issue_date`
-   - `Isbn_book` (FK → Books.ISBN)
-
-6. **ReturnStatus**
-   - `Return_Id` (PK)
-   - `Return_cust`
-   - `Return_book_name`
-   - `Return_date`
-   - `Isbn_book2` (FK → Books.ISBN)
-
----
-
-## 💻 SQL Queries Implemented
-
-| No | Description |
-|----|--------------|
-| 1 | Retrieve available book details |
-| 2 | List employees by salary (descending) |
-| 3 | List books and customers who issued them |
-| 4 | Count books by category |
-| 5 | Employees earning above ₹50,000 |
-| 6 | Customers registered before 2022 and not issued books |
-| 7 | Count employees per branch |
-| 8 | Customers who issued books in June 2023 |
-| 9 | Books containing the word "history" |
-| 10 | Branches with more than 5 employees |
-| 11 | Managers and their branch addresses |
-| 12 | Customers who issued books priced above ₹25 |
-
----
-
-## 🚀 How to Run the Project
+## Run locally
 
 1. Install MySQL Server and MySQL Workbench.
-2. Download or clone this repository.
-3. Open `Library_Management_System_SQL.sql` in MySQL Workbench.
-4. Execute the script to create the database, tables and sample records.
-5. Run the included queries to explore the analysis.
+2. Open `Library_Management_System_SQL.sql`.
+3. Execute the script in a fresh MySQL environment.
+4. Inspect the result sets produced by each query.
 
----
+The script creates a database named `library`. If that database already exists, remove or rename it before running the setup script again.
 
-## 👩‍💻 Author
+## Data note
 
-**Ashiba B**  
-Data Analyst | SQL | Power BI | Excel | Python  
+The included records are synthetic demonstration data. Contact numbers use dummy values and are not real contact details.
 
-[LinkedIn](https://www.linkedin.com/in/ashiba-data-analyst) | [Email](mailto:ashibab23@gmail.com)
+## Screenshots
+
+The `Screenshots/` directory contains query-output captures from the original exercise.
+
+## Author
+
+Ashiba B
+
+[LinkedIn](https://www.linkedin.com/in/ashiba-data-analyst) · [GitHub](https://github.com/ash-sheik)
