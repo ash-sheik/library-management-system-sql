@@ -18,10 +18,6 @@ CREATE TABLE Employee (
     FOREIGN KEY (Branch_no) REFERENCES Branch(Branch_no)
 );
 
-ALTER TABLE Branch
-ADD CONSTRAINT fk_branch_manager
-FOREIGN KEY (Manager_Id) REFERENCES Employee(Emp_Id);
-
 CREATE TABLE Books (
     ISBN INT PRIMARY KEY,
     Book_title VARCHAR(100),
@@ -61,9 +57,9 @@ CREATE TABLE ReturnStatus (
 
 -- Demonstration records are synthetic and for SQL practice only.
 INSERT INTO Branch VALUES
-(1, 201, 'MG Road, Bangalore', '0000000001'),
-(2, 203, 'Anna Nagar, Chennai', '0000000002'),
-(3, 205, 'Park Street, Kolkata', '0000000003');
+(1, NULL, 'MG Road, Bangalore', '0000000001'),
+(2, NULL, 'Anna Nagar, Chennai', '0000000002'),
+(3, NULL, 'Park Street, Kolkata', '0000000003');
 
 INSERT INTO Employee VALUES
 (201, 'Ravi Kumar', 'Manager', 70000, 1),
@@ -71,6 +67,15 @@ INSERT INTO Employee VALUES
 (203, 'Arjun Singh', 'Manager', 65000, 2),
 (204, 'Meena Joshi', 'Clerk', 30000, 3),
 (205, 'Raj Patel', 'Manager', 55000, 3);
+
+-- Assign managers after employee records exist, then enforce the relationship.
+UPDATE Branch SET Manager_Id = 201 WHERE Branch_no = 1;
+UPDATE Branch SET Manager_Id = 203 WHERE Branch_no = 2;
+UPDATE Branch SET Manager_Id = 205 WHERE Branch_no = 3;
+
+ALTER TABLE Branch
+ADD CONSTRAINT fk_branch_manager
+FOREIGN KEY (Manager_Id) REFERENCES Employee(Emp_Id);
 
 INSERT INTO Books VALUES
 (111, 'History of India', 'History', 30, 'yes', 'Bipin Chandra', 'Oxford'),
